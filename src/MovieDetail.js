@@ -48,19 +48,19 @@ export default MovieDetail;
 
 const MovieWrapper = styled.div`
   position: relative;
-  padding-top: 50vh;
+  padding-top: 60vh;
   background: url(${props => props.backdrop}) no-repeat;
   background-size: cover;
 `;
 
 const MovieInfo = styled.div`
-  background: white;
+  background: rgba(255, 255, 255, 0.8);
   text-align: left;
   padding: 2rem 10%;
   display: flex;
 
   > div {
-    margin-left: 2rem;
+    margin-left: 2.5rem;
   }
   img {
     position: relative;
