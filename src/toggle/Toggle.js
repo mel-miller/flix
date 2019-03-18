@@ -8,12 +8,12 @@ import { getMovies } from '../movies/actions';
 const Toggle = ({ messageVisibility, toggleMessage, getMovies }) => (
   <div>
     {messageVisibility
-      && <p>Toggled</p>
+      && <p>You will be seeing this if redux action is toggled</p>
     }
-    <button onClick={toggleMessage}>
+    <button type="button" onClick={toggleMessage}>
       Toggle Me
     </button>
-    <button onClick={getMovies}>
+    <button type="button" onClick={getMovies}>
       Load Movies
     </button>
   </div>
