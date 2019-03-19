@@ -31,9 +31,9 @@ export function resetMovie() {
   };
 }
 
-export function searchMovies() {
+export function searchMovies(term) {
   return async function (dispatch) {
-    const res = await fetch('https://api.themoviedb.org/3/search/movie?api_key=bd6c30d59224151decd977c2b20d4b48&language=en-US&query=help&page=1&include_adult=false');
+    const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=bd6c30d59224151decd977c2b20d4b48&language=en-US&query=${term}&page=1&include_adult=false`);
     const searchedMovies = await res.json();
     return dispatch({
       type: 'SEARCH_MOVIES',

@@ -8,15 +8,17 @@ import { searchMovies } from './actions';
 
 
 class MovieSearch extends PureComponent {
-  componentDidMount() {
+  handleSearch = (event) => {
     const { searchMovies } = this.props;
-    searchMovies();
+    const searchTerm = event.target.value;
+    searchMovies(searchTerm);
   }
 
   render() {
     const { searchedMovies } = this.props;
     return (
       <SearchArea>
+        <input onChange={this.handleSearch} />
         <SearchResults>
           {searchedMovies.map(movie => <Movie key={movie.id} movie={movie} />)}
         </SearchResults>
