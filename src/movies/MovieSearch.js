@@ -4,21 +4,25 @@ import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
 
 import Movie from './Movie';
-import { searchMovies } from './actions';
+import { searchMovies, clearSearch } from './actions';
 
 
 class MovieSearch extends PureComponent {
   handleSearch = (event) => {
-    const { searchMovies } = this.props;
-    const searchTerm = event.target.value;
-    searchMovies(searchTerm);
+    const { searchMovies, clearSearch } = this.props;
+    const term = event.target.value;
+    if (term) {
+      searchMovies(term);
+    } else {
+      clearSearch();
+    }
   }
 
   render() {
     const { searchedMovies } = this.props;
     return (
       <SearchArea>
-        <input onChange={this.handleSearch} />
+        <input onChange={this.handleSearch} placeholder="Title or Keyword" />
         <SearchResults>
           {searchedMovies.map(movie => <Movie key={movie.id} movie={movie} />)}
         </SearchResults>
@@ -33,6 +37,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   searchMovies,
+  clearSearch,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieSearch);

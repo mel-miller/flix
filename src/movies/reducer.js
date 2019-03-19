@@ -1,5 +1,5 @@
 import {
-  GET_MOVIES, GET_MOVIE, RESET_MOVIE, SEARCH_MOVIES,
+  GET_MOVIES, GET_MOVIE, RESET_MOVIE, SEARCH_MOVIES, CLEAR_SEARCH,
 } from './actions';
 
 const initialState = {
@@ -37,6 +37,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         searchedMovies: data,
+      };
+    case CLEAR_SEARCH:
+      return {
+        ...state,
+        searchedMovies: [],
       };
     default:
       return state;

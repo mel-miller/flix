@@ -2,6 +2,8 @@ export const GET_MOVIES = 'GET_MOVIES';
 export const GET_MOVIE = 'GET_MOVIE';
 export const RESET_MOVIE = 'RESET_MOVIE';
 export const SEARCH_MOVIES = 'SEARCH_MOVIES';
+export const CLEAR_SEARCH = 'CLEAR_SEARCH';
+
 
 export function getMovies() {
   return async function (dispatch) {
@@ -39,5 +41,11 @@ export function searchMovies(term) {
       type: 'SEARCH_MOVIES',
       data: searchedMovies.results,
     });
+  };
+}
+
+export function clearSearch() {
+  return {
+    type: 'CLEAR_SEARCH',
   };
 }
