@@ -1,4 +1,6 @@
-import { GET_MOVIES, GET_MOVIE, RESET_MOVIE } from './actions';
+import {
+  GET_MOVIES, GET_MOVIE, RESET_MOVIE, SEARCH_MOVIES,
+} from './actions';
 
 const initialState = {
   movies: [],
@@ -6,6 +8,7 @@ const initialState = {
   moviesLoadedAt: null,
   movie: {},
   movieLoaded: false,
+  searchedMovies: [],
 };
 
 export default function (state = initialState, action) {
@@ -29,6 +32,11 @@ export default function (state = initialState, action) {
         ...state,
         movie: {},
         movieLoaded: false,
+      };
+    case SEARCH_MOVIES:
+      return {
+        ...state,
+        searchedMovies: data,
       };
     default:
       return state;

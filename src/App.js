@@ -36,9 +36,9 @@ const App = () => (
             <img src={logo} className="App-logo" alt="logo" />
           </Link>
         </header>
-        <MovieSearch />
         <Switch>
           <Route exact path="/" component={MoviesList} />
+          <Route exact path="/search" component={MovieSearch} />
           <Route path="/:id" component={MovieDetail} />
         </Switch>
       </div>

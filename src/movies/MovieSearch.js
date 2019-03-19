@@ -1,46 +1,52 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import styled from 'styled-components';
 
-import MovieRow from './MovieRow';
+import Movie from './Movie';
+import { searchMovies } from './actions';
 
 
-class MovieSearch extends Component {
-  constructor(props) {
-    super(props);
-
-    const movies = [
-      {
-        id: 1,
-        posterImg: 'http://image.tmdb.org/t/p/w92/AtsgWhDnHTq68L0lLsUrCnM7TjG.jpg',
-        title: 'Movie 1',
-      },
-      {
-        id: 2,
-        posterImg: 'http://image.tmdb.org/t/p/w92/lHu1wtNaczFPGFDTrjCSzeLPTKN.jpg',
-        title: 'Movie 2',
-      },
-    ];
-
-    const movieRows = [];
-    movies.forEach((movie) => {
-      const movieRow = <MovieRow movie={movie} />;
-      movieRows.push(movieRow);
-    });
-
-    this.state = { rows: movieRows };
+class MovieSearch extends PureComponent {
+  componentDidMount() {
+    const { searchMovies } = this.props;
+    searchMovies();
   }
 
   render() {
-    const { rows } = this.state;
+    const { searchedMovies } = this.props;
     return (
-      <div>
-        <table>
-          <tbody>
-            {rows}
-          </tbody>
-        </table>
-      </div>
+      <SearchArea>
+        <SearchResults>
+          {searchedMovies.map(movie => <Movie key={movie.id} movie={movie} />)}
+        </SearchResults>
+      </SearchArea>
     );
   }
 }
 
-export default MovieSearch;
+const mapStateToProps = state => ({
+  searchedMovies: state.movies.searchedMovies,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  searchMovies,
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieSearch);
+
+const SearchArea = styled.div`
+  background: #ddd;
+  padding: 20px;
+`;
+
+const SearchResults = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+
+  img {
+    margin: 1rem;
+  }
+`;
