@@ -9,12 +9,15 @@ import { getMovies } from './actions';
 
 class MoviesList extends PureComponent {
   componentDidMount() {
-    const { getMovies } = this.props;
-    getMovies();
+    const { getMovies, isLoaded } = this.props;
+    if (!isLoaded) {
+      getMovies();
+    }
   }
 
   render() {
-    const { movies } = this.props;
+    const { movies, isLoaded } = this.props;
+    if (!isLoaded) return <span>Loading...</span>;
     return (
       <MovieGrid>
         {movies.map(movie => <Movie key={movie.id} movie={movie} />)}
@@ -25,6 +28,7 @@ class MoviesList extends PureComponent {
 
 const mapStateToProps = state => ({
   movies: state.movies.movies,
+  isLoaded: state.movies.moviesLoaded,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
