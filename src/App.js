@@ -16,7 +16,7 @@ import rootReducer from './rootReducer';
 
 import MoviesList from './movies/MoviesList';
 import MovieDetail from './movies/MovieDetail';
-import Toggle from './toggle/Toggle';
+import MovieSearch from './movies/MovieSearch';
 
 const middleware = [logger, thunk];
 
@@ -36,7 +36,7 @@ const App = () => (
             <img src={logo} className="App-logo" alt="logo" />
           </Link>
         </header>
-        <Toggle />
+        <MovieSearch />
         <Switch>
           <Route exact path="/" component={MoviesList} />
           <Route path="/:id" component={MovieDetail} />
